@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+	
+	<style>
+		
+		body{
+		font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+		width:800px;
+		height: 800px;
+		margin: auto;
+		}
+		button#shufflebtn{
+			
+		}
+		div#grid {
+		border: none;
+		width:500px;
+		height:500px;
+		padding:0px;
+		margin: auto;
+		}
+		
+		div{	
+		border:5px solid black;
+		width: 50px;
+		height: 50px;
+		margin:10px;
+		padding:20px;
+			float:left;
+		position: relative;
+		font-size: 25pt;
+		text-align: center;
+		cursor:pointer;
+		}
+		div#up{
+			transform: translate(0px,-120px);
+		}
+		div#down{
+			transform: translate(0px,120px);
+		}
+		div#left{
+			transform: translate(-120px,0px);
+		}
+		div#right{
+			transform: translate(120px, 0px);
+		}
+		div#tile_16{
+			visibility:hidden;
+		}
+
+	
+	</style>
+<title>Puzzle</title>
+</head>
+<script>
+	var array = new Array(4);
+	
+	function CreateGrid(){
+	for (var i=0; i<array.length; i++){
+		array[i]= new Array(4);
+	}
+		var h = 0;
+		for (var i=0; i<4; i++){
+			for (var j=0; j<4; j++){
+				array[i][j] = h+1;
+				document.getElementById('grid').innerHTML +='<div id="tile_'+array[i][j]+'">'+array[i][j]+'</div>';
+				h = h+1;
+			}
+		}
+	}
+	Array.prototype.array_shuffle = function(){
+		var temp;
+    for (var i = 0; i < this.length; i++) {
+        for (var j = 0; j < this.length; j++) {
+            var m = Math.floor(Math.random() * (this.length));
+            var n =  Math.floor(Math.random() * (this.length));
+			
+            temp = this[i][j];
+            this[i][j] = this[m][n];
+            this[m][n] = temp;
+        }
+    }
+}
+	function Shuffle(){
+		array.array_shuffle();
+		document.getElementById('grid').innerHTML="";
+		for (var i=0; i<4; i++){
+			for (var j=0; j<4; j++){					
+				
+				document.getElementById('grid').innerHTML +='<div onClick="TilePressed(this,'+array[i][j]+')" id="tile_'+array[i][j]+'">'+array[i][j]+'</div>';
+			}
+		}
+	}
+				//the tile preseed and its value
+	
+	function TilePressed(tile,val){
+		var value = val;
+		var v_index = getIndexOf(array,value);
+		var v_indexi = v_index[0];
+		var v_indexj = v_index[1];
+		
+		var emphty = 16;
+		var e_index = getIndexOf(array,emphty);
+		var e_indexi =e_index[0];
+		var e_indexj =e_index[1];
+		
+	
+		if((v_indexi+1||v_indexi-1)==e_indexi){
+			if(v_indexj==e_indexj){
+				if(((v_indexi)-(e_indexi))>0){
+					tile.style.transform = "translate(0px,-120px)";
+					document.getElementById("tile_16").style.transform = "translate(0px,120px)";
+				}
+				else{
+					tile.style.transform = "translate(0px,120px)";
+					document.getElementById("tile_16").style.transform = "translate(0px,-120px)";
+
+				}
+				var temp = array[e_indexi,e_indexj];
+				array[e_indexi,e_indexj] = array[v_indexi,v_indexj];
+				array[v_indexi,v_indexj] = temp;
+			}
+				
+			} 
+		else if((v_indexj+1||v_indexj-1)==e_indexj){
+			if(v_indexi==e_indexi){
+				if((v_indexj-e_indexj)>0){
+					tile.style.transform = "translate(-120px,0px)";
+					document.getElementById("tile_16").style.transform = "translate(120px,0px)";
+	
+				}
+				else{
+					tile.style.transform = "translate(120px,0px)";
+					document.getElementById("tile_16").style.transform = "translate(-120px,0px)";
+				}
+			var temp = array[e_indexi,e_indexj];
+				array[e_indexi,e_indexj] = array[v_indexi,v_indexj];
+				array[v_indexi,v_indexj] = temp;
+			} 
+		}
+		
+		else {
+			document.getElementById("message").innerHTML = "You cannot choose that tile. Try again";
+		}
+	}
+	
+	function getIndexOf(arr,k){
+		for (var i=0; i<arr.length; i++){
+			var index = arr[i].indexOf(k);
+			if (index>-1){
+				return [i,index];
+			}
+		}
+	}
+
+</script>
+<body onLoad="CreateGrid()">
+	<h1>Fifteen Puzzle Game</h1>
+	<div id= "grid"></div>
+	<p id="message"></p>
+	<button id="shufflebtn" onClick="Shuffle()">Shuffle</button>
+</body>
+</html>
