@@ -1,5 +1,12 @@
 var tile_matrix = new Array(4);
 
+function ChangeBackground(){
+
+    var i = Math.floor(Math.random() * 5);
+    var backgroundarray = ["background2.png","background3.png","background4.png","background5.png","background.png"];
+    document.body.style.backgroundImage = "url("+backgroundarray[i]+")";
+}
+
 //Populate HTML with tiles
 function CreateGrid(){
     
