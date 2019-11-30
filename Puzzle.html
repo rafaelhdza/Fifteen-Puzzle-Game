@@ -16,6 +16,7 @@
 		}
 		div#grid {
 		border: none;
+		background: none;
 		width:500px;
 		height:500px;
 		padding:0px;
@@ -28,7 +29,7 @@
 		height: 50px;
 		margin:10px;
 		padding:20px;
-			float:left;
+		float:left;
 		position: relative;
 		font-size: 25pt;
 		text-align: center;
@@ -55,94 +56,149 @@
 <title>Puzzle</title>
 </head>
 <script>
-	var array = new Array(4);
+	var tile_matrix = new Array(4);
 	
+	//Populate HTML with tiles
 	function CreateGrid(){
-	for (var i=0; i<array.length; i++){
-		array[i]= new Array(4);
-	}
+		
+		//Create blank 2d tile_matrix
+		for (var i=0; i<tile_matrix.length; i++){
+			tile_matrix[i]= new Array(4);
+		}
+		//Generate HTML elements for tiles 1-15
 		var h = 0;
 		for (var i=0; i<4; i++){
 			for (var j=0; j<4; j++){
-				array[i][j] = h+1;
-				document.getElementById('grid').innerHTML +='<div id="tile_'+array[i][j]+'">'+array[i][j]+'</div>';
+				tile_matrix[i][j] = h+1;
+				document.getElementById('grid').innerHTML +='<div id="tile_'+tile_matrix[i][j]+'">'+tile_matrix[i][j]+'</div>';
 				h = h+1;
 			}
 		}
+		
+		//Call shuffle
+		Shuffle()
 	}
+	
+	//Shuffle override
 	Array.prototype.array_shuffle = function(){
 		var temp;
-    for (var i = 0; i < this.length; i++) {
-        for (var j = 0; j < this.length; j++) {
-            var m = Math.floor(Math.random() * (this.length));
-            var n =  Math.floor(Math.random() * (this.length));
-			
-            temp = this[i][j];
-            this[i][j] = this[m][n];
-            this[m][n] = temp;
-        }
-    }
-}
+		for (var i = 0; i < this.length; i++) {
+			for (var j = 0; j < this.length; j++) {
+				var m = Math.floor(Math.random() * (this.length));
+				var n =  Math.floor(Math.random() * (this.length));
+				
+				temp = this[i][j];
+				this[i][j] = this[m][n];
+				this[m][n] = temp;
+			}
+		}
+	}
+	
+	//Shuffle main call
 	function Shuffle(){
-		array.array_shuffle();
+		tile_matrix.array_shuffle();
 		document.getElementById('grid').innerHTML="";
 		for (var i=0; i<4; i++){
 			for (var j=0; j<4; j++){					
-				
-				document.getElementById('grid').innerHTML +='<div onClick="TilePressed(this,'+array[i][j]+')" id="tile_'+array[i][j]+'">'+array[i][j]+'</div>';
+				document.getElementById('grid').innerHTML +='<div onClick="TilePressed(this,'+tile_matrix[i][j]+')" id="tile_'+tile_matrix[i][j]+'">'+tile_matrix[i][j]+'</div>';
 			}
 		}
 	}
-				//the tile preseed and its value
-	
-	function TilePressed(tile,val){
-		var value = val;
-		var v_index = getIndexOf(array,value);
-		var v_indexi = v_index[0];
-		var v_indexj = v_index[1];
-		
-		var emphty = 16;
-		var e_index = getIndexOf(array,emphty);
-		var e_indexi =e_index[0];
-		var e_indexj =e_index[1];
-		
-	
-		if((v_indexi+1||v_indexi-1)==e_indexi){
-			if(v_indexj==e_indexj){
-				if(((v_indexi)-(e_indexi))>0){
-					tile.style.transform = "translate(0px,-120px)";
-					document.getElementById("tile_16").style.transform = "translate(0px,120px)";
-				}
-				else{
-					tile.style.transform = "translate(0px,120px)";
-					document.getElementById("tile_16").style.transform = "translate(0px,-120px)";
 
-				}
-				var temp = array[e_indexi,e_indexj];
-				array[e_indexi,e_indexj] = array[v_indexi,v_indexj];
-				array[v_indexi,v_indexj] = temp;
-			}
-				
-			} 
-		else if((v_indexj+1||v_indexj-1)==e_indexj){
-			if(v_indexi==e_indexi){
-				if((v_indexj-e_indexj)>0){
-					tile.style.transform = "translate(-120px,0px)";
-					document.getElementById("tile_16").style.transform = "translate(120px,0px)";
-	
-				}
-				else{
-					tile.style.transform = "translate(120px,0px)";
-					document.getElementById("tile_16").style.transform = "translate(-120px,0px)";
-				}
-			var temp = array[e_indexi,e_indexj];
-				array[e_indexi,e_indexj] = array[v_indexi,v_indexj];
-				array[v_indexi,v_indexj] = temp;
-			} 
-		}
+	//Tile action
+	function TilePressed(currentTile,currentTileVal){
 		
+		//Selected tile attributes
+		var currentTile_position = getIndexOf(tile_matrix,currentTileVal);
+		var currentTile_row = currentTile_position[0];
+		var currentTile_col = currentTile_position[1];
+
+		if (currentTile.style.transform != ''){
+			var transformProps = currentTile.style.transform.match(/[\d -]+/g)
+			var currentTile_transform_x = parseInt(transformProps[0])
+			var currentTile_transform_y = parseInt(transformProps[1])
+		}
+
 		else {
-			document.getElementById("message").innerHTML = "You cannot choose that tile. Try again";
+			var currentTile_transform_x = 0
+			var currentTile_transform_y = 0
+		}
+
+		console.log('Current tile transform values: ' + currentTile_transform_x + ',' + currentTile_transform_y)
+
+
+		//Blank tile attributes
+		var blankTile = document.getElementById("tile_16")
+		var blankTileVal = 16;
+		var blankTile_position = getIndexOf(tile_matrix,blankTileVal);
+		var blankTile_row = blankTile_position[0];
+		var blankTile_col = blankTile_position[1];
+
+		if (blankTile.style.transform != ''){
+			var blankTile_transformProps = blankTile.style.transform.match(/[\d -]+/g)
+			var blankTile_transform_x = parseInt(blankTile_transformProps[0])
+			var blankTile_transform_y = parseInt(blankTile_transformProps[1])
+		}
+
+		else {
+			var blankTile_transform_x = 0
+			var blankTile_transform_y = 0
+		}
+
+		console.log('Blank tile transform values: ' + blankTile_transform_x + ',' + blankTile_transform_y)
+
+
+		//If the blank tile row is above or below current row
+		if( (currentTile_row+1 == blankTile_row) || (currentTile_row-1 == blankTile_row) ){
+
+			if(currentTile_col == blankTile_col){
+				//Blank is above | Current is Below
+				if(((currentTile_row)-(blankTile_row))>0){
+					currentTile.style.transform = `translate(${currentTile_transform_x}px,${currentTile_transform_y - 120}px)`
+					blankTile.style.transform = `translate(${blankTile_transform_x}px,${blankTile_transform_y + 120}px)`;
+				}
+
+				//Blank is below | Current is above
+				else{
+					currentTile.style.transform = `translate(${currentTile_transform_x}px,${currentTile_transform_y + 120}px)`
+					blankTile.style.transform = `translate(${blankTile_transform_x}px,${blankTile_transform_y - 120}px)`;
+				}
+
+				//Swap tile_matrix values in board matrix
+				var temp = tile_matrix[blankTile_row][blankTile_col];
+				tile_matrix[blankTile_row][blankTile_col] = tile_matrix[currentTile_row][currentTile_col];
+				tile_matrix[currentTile_row][currentTile_col] = temp;
+					
+			}
+
+		}
+
+		//If the blank tile column is on either side of current column 
+		else if( (currentTile_col+1 == blankTile_col) || (currentTile_col-1==blankTile_col) ){
+
+			if(currentTile_row == blankTile_row){
+				//Blank is on left | Current is on right
+				if((currentTile_col-blankTile_col)>0){
+					currentTile.style.transform = `translate(${currentTile_transform_x - 120}px,${currentTile_transform_y}px)`
+					blankTile.style.transform = `translate(${blankTile_transform_x + 120}px,${blankTile_transform_y}px)`
+				}
+
+				//Blank is on right | Current is on left
+				else{
+					currentTile.style.transform = `translate(${currentTile_transform_x + 120}px,${currentTile_transform_y}px)`
+					blankTile.style.transform = `translate(${blankTile_transform_x - 120}px,${blankTile_transform_y}px)`
+				}
+
+				//Swap tile_matrix values in board matrix
+				var temp = tile_matrix[blankTile_row][blankTile_col];
+				tile_matrix[blankTile_row][blankTile_col] = tile_matrix[currentTile_row][currentTile_col];
+				tile_matrix[currentTile_row][currentTile_col] = temp;
+			}
+		}
+
+		//Chosen tile and blank tile are not adjacent in any way
+		else {
+			document.getElementById("message").innerHTML = "This tile cannot be moved";
 		}
 	}
 	
