@@ -1,0 +1,45 @@
+body{
+    font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
+    width:800px;
+    height: 800px;
+    margin: auto;
+    }
+    button#shufflebtn{
+        
+    }
+    div#grid {
+    border: none;
+    background: none;
+    width:500px;
+    height:500px;
+    padding:0px;
+    margin: auto;
+    }
+    
+    div{	
+    border:5px solid black;
+    width: 50px;
+    height: 50px;
+    margin:10px;
+    padding:20px;
+    float:left;
+    position: relative;
+    font-size: 25pt;
+    text-align: center;
+    cursor:pointer;
+    }
+    div#up{
+        transform: translate(0px,-120px);
+    }
+    div#down{
+        transform: translate(0px,120px);
+    }
+    div#left{
+        transform: translate(-120px,0px);
+    }
+    div#right{
+        transform: translate(120px, 0px);
+    }
+    div#tile_16{
+        visibility:hidden;
+    }
