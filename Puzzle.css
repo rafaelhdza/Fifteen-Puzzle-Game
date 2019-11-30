@@ -1,11 +1,29 @@
 body{
-    font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, "sans-serif";
-    width:800px;
+	width:800px;
     height: 800px;
     margin: auto;
+    background-image: url("background.png");
+    background-color: #663a30;
+    background-repeat:repeat-x;
+
     }
-    button#shufflebtn{
-        
+h1{
+text-align: center;
+font-family: chewy, sans-serif;
+
+}    
+button#shufflebtn{
+	background-color: rebeccapurple;
+	width: 100px;
+	height: 50px;
+	border: 5px black;
+	border-radius: 25px;
+	font-size: 16px;
+	color: white;
+	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif";
+	position: relative;
+    right:450px;
+	top:50px;
     }
     div#grid {
     border: none;
@@ -13,20 +31,31 @@ body{
     width:500px;
     height:500px;
     padding:0px;
-    margin: auto;
+    margin: 0 auto;
+	align-content: center;
+	box-shadow: none;
+	position: relative;
+	right:200px;
+    left:200px;
+		
     }
     
-    div{	
-    border:5px solid black;
+    div{
+	font-family: chewy, sans-serif;
+    border:5px solid #21837F;
+	border-radius: 25px;
+	box-shadow:5px 10px 5px black;
     width: 50px;
     height: 50px;
     margin:10px;
     padding:20px;
     float:left;
     position: relative;
-    font-size: 25pt;
+    font-size: 30pt;
     text-align: center;
     cursor:pointer;
+	color: white;
+	background-color:mediumturquoise;
     }
     div#up{
         transform: translate(0px,-120px);

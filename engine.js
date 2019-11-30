@@ -49,7 +49,7 @@ function Shuffle(){
 
 //Tile action
 function TilePressed(currentTile,currentTileVal){
-    
+    //Call Timer
     //Selected tile attributes
     var currentTile_position = getIndexOf(tile_matrix,currentTileVal);
     var currentTile_row = currentTile_position[0];
