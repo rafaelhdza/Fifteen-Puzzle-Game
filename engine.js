@@ -1,7 +1,15 @@
+//Global Vars
 var tile_matrix = new Array(4);
+var moveCount = 0;
+var startTime;
+var updatedTime;
+var difference;
+var tInterval;
+var savedTime;
+var stopped = false;
+var running = false;
 
 function ChangeBackground(){
-
     var i = Math.floor(Math.random() * 5);
     var backgroundarray = ["background2.png","background3.png","background4.png","background5.png","background.png"];
     document.body.style.backgroundImage = "url("+backgroundarray[i]+")";
@@ -45,6 +53,8 @@ Array.prototype.array_shuffle = function(){
 
 //Shuffle main call
 function Shuffle(){
+    resetTimer();
+    resetMoveCount();
     tile_matrix.array_shuffle();
     document.getElementById('grid').innerHTML="";
     for (var i=0; i<4; i++){
@@ -56,7 +66,7 @@ function Shuffle(){
 
 //Tile action
 function TilePressed(currentTile,currentTileVal){
-    //Call Timer
+
     //Selected tile attributes
     var currentTile_position = getIndexOf(tile_matrix,currentTileVal);
     var currentTile_row = currentTile_position[0];
@@ -118,9 +128,9 @@ function TilePressed(currentTile,currentTileVal){
             var temp = tile_matrix[blankTile_row][blankTile_col];
             tile_matrix[blankTile_row][blankTile_col] = tile_matrix[currentTile_row][currentTile_col];
             tile_matrix[currentTile_row][currentTile_col] = temp;
-                
-        }
 
+            incrementMoveCount();    
+        }
     }
 
     //If the blank tile column is on either side of current column 
@@ -144,6 +154,7 @@ function TilePressed(currentTile,currentTileVal){
             tile_matrix[blankTile_row][blankTile_col] = tile_matrix[currentTile_row][currentTile_col];
             tile_matrix[currentTile_row][currentTile_col] = temp;
 
+            incrementMoveCount();    
         }
     }
 
@@ -154,6 +165,7 @@ function TilePressed(currentTile,currentTileVal){
 
     //Check to see if move solved the puzzle
     if(isSolved()) {
+        stopTimer();
         alert('Congrats! You solved the puzzle!')
         console.log("Solved")
     }
@@ -179,4 +191,69 @@ function isSolved(){
         }
     }
     return true;
+}
+
+function incrementMoveCount(){
+    moveCount++
+    console.log('Move count: ' + moveCount)
+    if(!running) startTimer()
+    document.getElementById("moveCount").innerHTML = moveCount
+    return;
+}
+
+function resetMoveCount(){
+    moveCount = 0
+    document.getElementById("moveCount").innerHTML = moveCount
+}
+
+function startTimer(){
+    console.log('Timer start method hit');
+    if(!running){
+        startTime = new Date().getTime();
+        tInterval = setInterval(getShowTime, 1);
+        stopped = false;
+        running = true;        
+    }
+}
+
+function stopTimer(){
+    if(!difference){}
+    else if (!stopped){
+        clearInterval(tInterval);
+        savedTime = difference;
+        stopped = true;
+        running = false;
+    }
+    else {
+        startTimer();
+    }
+}
+
+function resetTimer(){
+    clearInterval(tInterval);
+    savedTime = 0;
+    difference = 0;
+    stopped = false
+    running = false
+    document.getElementById("timer").innerHTML = '00:00:00';
+}
+
+function getShowTime(){
+
+    updatedTime = new Date().getTime();
+    if(savedTime){
+        difference = (updatedTime - startTime) + savedTime;
+    }
+    else {
+        difference = updatedTime - startTime;
+    }
+
+    var minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    var milliseconds = Math.floor((difference % (1000 * 60)) / 100);
+
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+    milliseconds = (milliseconds < 100) ? (milliseconds < 10) ? "00" + milliseconds : "0" + milliseconds : milliseconds;
+    document.getElementById("timer").innerHTML = minutes + ':' + seconds + ':' + milliseconds;
 }
