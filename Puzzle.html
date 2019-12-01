@@ -10,11 +10,14 @@
 	
 	<body onLoad="CreateGrid()">
 		<h1>Fifteen Puzzle Game</h1>
-
 		<div id= "grid"></div>
-		<p id="message"></p>
-	<button id="shufflebtn" onClick="Shuffle()">Shuffle</button>
-	<button id="background" onClick="ChangeBackground()">Change Background</button>
-
-</body>
+		<p id="error-message"></p>
+		<button id="shufflebtn" onClick="Shuffle()">Shuffle</button>
+		<button id="background" onClick="ChangeBackground()">Change Background</button>
+		<div id="counter-container">
+			<p id="counter-message">Move count: </p>
+			<span id="moveCount">0</span>
+		</div>
+		<div id="timer">Start game!</div>
+	</body>
 </html>
