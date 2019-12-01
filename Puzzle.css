@@ -1,20 +1,21 @@
-body{
+body {
 	width:800px;
     height: 800px;
     margin: auto;
     background-image: url("background.png");
     background-color: #663a30;
     background-repeat:repeat-x;
-
-    }
-h1{
-text-align: center;
-font-family: chewy, sans-serif;
-
 }
-p{
-font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif";
-position: relative;
+
+h1 {
+    text-align: center;
+    font-family: chewy, sans-serif;
+}
+
+/* Error message when clicking on ineligible tile */
+#error-message {
+    font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif";
+    position: relative;
     right: 550px;
     top:550px;
     font-size: 20pt;
@@ -23,19 +24,13 @@ position: relative;
     animation:fadeout 0.5s 1;
     -webkit-animation:fadeout 0.5s 1;
     animation-fill-mode: forwards;
-
     animation-delay:2s;
     -webkit-animation-delay:2s; 
     -webkit-animation-fill-mode: forwards;
-
 }
-@-webkit-keyframes fadeout{
-    0%   {opacity: 1;}
-    70%  {opacity: 1;}
-    90% {opacity: 1;-webkit-transform: translateY(0px);}
-    100% {opacity: 0;-webkit-transform: translateY(-30px);}
-}   
-button#shufflebtn{
+
+/* Buttons */
+button#shufflebtn {
 	background-color: rebeccapurple;
 	width: 100px;
 	height: 50px;
@@ -46,9 +41,11 @@ button#shufflebtn{
 	font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif";
 	position: relative;
     right:450px;
-	top:50px;
-    }
-button#background{
+    top:50px;
+    cursor: pointer;
+}
+
+button#background {
     background-color: rebeccapurple;
     width: 150px;
     height: 50px;
@@ -60,99 +57,120 @@ button#background{
     position: relative;
     right:600px;
     top:150px;
-    }
+    cursor: pointer;
+}
 
-    div#grid {
+/* TileGrid */
+div#grid {
     border: none;
     background: none;
     width:500px;
     height:500px;
     padding:0px;
     margin: 0 auto;
-	align-content: center;
-	box-shadow: none;
-	position: relative;
-	right:200px;
-    left:200px;
-		
-    }
-    
-    div{
-	font-family: chewy, sans-serif;
-    border:5px solid #21837F;
-	border-radius: 25px;
-	box-shadow:5px 10px 5px black;
-    width: 50px;
-    height: 50px;
-    margin:10px;
-    padding:20px;
-    float:left;
+    align-content: center;
+    box-shadow: none;
     position: relative;
-    font-size: 30pt;
-    text-align: center;
-    cursor:pointer;
-	color: white;
-    text-shadow: 2px 2px black;  
+    right:200px;
+    left:200px;
+}
 
+    div {
+        font-family: chewy, sans-serif;
+        border:5px solid #21837F;
+        border-radius: 25px;
+        box-shadow:5px 10px 5px black;
+        width: 50px;
+        height: 50px;
+        margin:10px;
+        padding:20px;
+        float:left;
+        position: relative;
+        font-size: 30pt;
+        text-align: center;
+        cursor:pointer;
+        color: white;
+        text-shadow: 2px 2px black;  
     }
 
-    div#up{
-        transform: translate(0px,-120px);
+    div#tile_1{
+        background-image: url("./mario8bit/mario1.jpg");
     }
-    div#down{
-        transform: translate(0px,120px);
+    div#tile_2 {
+        background-image: url("./mario8bit/mario2.jpg");
     }
-    div#left{
-        transform: translate(-120px,0px);
+    div#tile_3 {
+        background-image: url("./mario8bit/mario3.jpg");
     }
-    div#right{
-        transform: translate(120px, 0px);
+    div#tile_4 {
+        background-image: url("./mario8bit/mario4.jpg");
     }
-      div#tile_1{
-    background-image: url("./mario8bit/mario1.jpg");
+    div#tile_5 {
+        background-image: url("./mario8bit/mario5.jpg");
     }
-      div#tile_2{
-    background-image: url("./mario8bit/mario2.jpg");
+    div#tile_6 {
+        background-image: url("./mario8bit/mario6.jpg");
     }
-      div#tile_3{
-    background-image: url("./mario8bit/mario3.jpg");
+    div#tile_7 {
+        background-image: url("./mario8bit/mario7.jpg");
     }
-      div#tile_4{
-    background-image: url("./mario8bit/mario4.jpg");
+    div#tile_8 {
+        background-image: url("./mario8bit/mario8.jpg");
     }
-      div#tile_5{
-    background-image: url("./mario8bit/mario5.jpg");
+    div#tile_9 {
+        background-image: url("./mario8bit/mario9.jpg");
     }
-      div#tile_6{
-    background-image: url("./mario8bit/mario6.jpg");
+    div#tile_10 {
+        background-image: url("./mario8bit/mario10.jpg");
     }
-      div#tile_7{
-    background-image: url("./mario8bit/mario7.jpg");
+    div#tile_11 {
+        background-image: url("./mario8bit/mario11.jpg");
     }
-      div#tile_8{
-    background-image: url("./mario8bit/mario8.jpg");
+    div#tile_12 {
+        background-image: url("./mario8bit/mario12.jpg");
     }
-      div#tile_9{
-    background-image: url("./mario8bit/mario9.jpg");
+    div#tile_13 {
+        background-image: url("./mario8bit/mario13.jpg");
     }
-      div#tile_10{
-    background-image: url("./mario8bit/mario10.jpg");
-    }
-      div#tile_11{
-    background-image: url("./mario8bit/mario11.jpg");
-    }
-      div#tile_12{
-    background-image: url("./mario8bit/mario12.jpg");
-    }
-      div#tile_13{
-    background-image: url("./mario8bit/mario13.jpg");
-    }
-      div#tile_14{
-    background-image: url("./mario8bit/mario14.jpg");
+    div#tile_14 {
+        background-image: url("./mario8bit/mario14.jpg");
     }
     div#tile_15{
-    background-image: url("./mario8bit/mario15.jpg");
+        background-image: url("./mario8bit/mario15.jpg");
     }
     div#tile_16{
         visibility:hidden;
     }
+
+/* Timer */
+#timer {
+    position: absolute;
+    left: 0px;
+    width: 300px;
+}
+
+/* Counter */
+#counter-container {
+    position: absolute;
+    left: 0px;
+    top: 250px;
+    width: 300px;
+}
+    #counter-message {
+        display: inline;
+        margin: unset;
+    }
+
+/* Keyframes */
+@keyframes fadeout{
+    0%   {opacity: 1;}
+    70%  {opacity: 1;}
+    90% {opacity: 1;-webkit-transform: translateY(0px);}
+    100% {opacity: 0;-webkit-transform: translateY(-30px);}
+}
+@-webkit-keyframes fadeout{
+    0%   {opacity: 1;}
+    70%  {opacity: 1;}
+    90% {opacity: 1;-webkit-transform: translateY(0px);}
+    100% {opacity: 0;-webkit-transform: translateY(-30px);}
+}  
