@@ -45,7 +45,7 @@ button#shufflebtn {
     cursor: pointer;
 }
 
-button#background {
+button#background, button#puzzle{
     background-color: rebeccapurple;
     width: 150px;
     height: 50px;
@@ -58,6 +58,11 @@ button#background {
     right:600px;
     top:150px;
     cursor: pointer;
+}
+
+button#puzzle {
+    top: 200px;
+    right: 500px;
 }
 
 /* TileGrid */
@@ -136,51 +141,6 @@ div#counter-container {
         text-shadow: 2px 2px black;  
     }
 
-    div#tile_1{
-        background-image: url("./mario8bit/mario1.jpg");
-    }
-    div#tile_2 {
-        background-image: url("./mario8bit/mario2.jpg");
-    }
-    div#tile_3 {
-        background-image: url("./mario8bit/mario3.jpg");
-    }
-    div#tile_4 {
-        background-image: url("./mario8bit/mario4.jpg");
-    }
-    div#tile_5 {
-        background-image: url("./mario8bit/mario5.jpg");
-    }
-    div#tile_6 {
-        background-image: url("./mario8bit/mario6.jpg");
-    }
-    div#tile_7 {
-        background-image: url("./mario8bit/mario7.jpg");
-    }
-    div#tile_8 {
-        background-image: url("./mario8bit/mario8.jpg");
-    }
-    div#tile_9 {
-        background-image: url("./mario8bit/mario9.jpg");
-    }
-    div#tile_10 {
-        background-image: url("./mario8bit/mario10.jpg");
-    }
-    div#tile_11 {
-        background-image: url("./mario8bit/mario11.jpg");
-    }
-    div#tile_12 {
-        background-image: url("./mario8bit/mario12.jpg");
-    }
-    div#tile_13 {
-        background-image: url("./mario8bit/mario13.jpg");
-    }
-    div#tile_14 {
-        background-image: url("./mario8bit/mario14.jpg");
-    }
-    div#tile_15{
-        background-image: url("./mario8bit/mario15.jpg");
-    }
     div#tile_16{
         visibility:hidden;
     }
