@@ -11,7 +11,30 @@ h1{
 text-align: center;
 font-family: chewy, sans-serif;
 
-}    
+}
+p{
+font-family: Impact, Haettenschweiler, "Franklin Gothic Bold", "Arial Black", "sans-serif";
+position: relative;
+    right: 550px;
+    top:550px;
+    font-size: 20pt;
+    color: white;
+    text-shadow: 2px 2px black;  
+    animation:fadeout 0.5s 1;
+    -webkit-animation:fadeout 0.5s 1;
+    animation-fill-mode: forwards;
+
+    animation-delay:2s;
+    -webkit-animation-delay:2s; 
+    -webkit-animation-fill-mode: forwards;
+
+}
+@-webkit-keyframes fadeout{
+    0%   {opacity: 1;}
+    70%  {opacity: 1;}
+    90% {opacity: 1;-webkit-transform: translateY(0px);}
+    100% {opacity: 0;-webkit-transform: translateY(-30px);}
+}   
 button#shufflebtn{
 	background-color: rebeccapurple;
 	width: 100px;
@@ -69,8 +92,10 @@ button#background{
     text-align: center;
     cursor:pointer;
 	color: white;
-	background-color:mediumturquoise;
+    text-shadow: 2px 2px black;  
+
     }
+
     div#up{
         transform: translate(0px,-120px);
     }
@@ -82,6 +107,51 @@ button#background{
     }
     div#right{
         transform: translate(120px, 0px);
+    }
+      div#tile_1{
+    background-image: url("./mario8bit/mario1.jpg");
+    }
+      div#tile_2{
+    background-image: url("./mario8bit/mario2.jpg");
+    }
+      div#tile_3{
+    background-image: url("./mario8bit/mario3.jpg");
+    }
+      div#tile_4{
+    background-image: url("./mario8bit/mario4.jpg");
+    }
+      div#tile_5{
+    background-image: url("./mario8bit/mario5.jpg");
+    }
+      div#tile_6{
+    background-image: url("./mario8bit/mario6.jpg");
+    }
+      div#tile_7{
+    background-image: url("./mario8bit/mario7.jpg");
+    }
+      div#tile_8{
+    background-image: url("./mario8bit/mario8.jpg");
+    }
+      div#tile_9{
+    background-image: url("./mario8bit/mario9.jpg");
+    }
+      div#tile_10{
+    background-image: url("./mario8bit/mario10.jpg");
+    }
+      div#tile_11{
+    background-image: url("./mario8bit/mario11.jpg");
+    }
+      div#tile_12{
+    background-image: url("./mario8bit/mario12.jpg");
+    }
+      div#tile_13{
+    background-image: url("./mario8bit/mario13.jpg");
+    }
+      div#tile_14{
+    background-image: url("./mario8bit/mario14.jpg");
+    }
+    div#tile_15{
+    background-image: url("./mario8bit/mario15.jpg");
     }
     div#tile_16{
         visibility:hidden;
