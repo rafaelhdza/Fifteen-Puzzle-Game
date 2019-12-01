@@ -1,6 +1,10 @@
 //Global Vars
 var tile_matrix = new Array(4);
 var moveCount = 0;
+var character = Math.floor(Math.random() * 3);
+var puzzleStyles = ["bowser","mario","peach"];
+var backgroundarray = ["background2.png","background3.png","background4.png","background5.png","background.png"];
+
 var startTime;
 var updatedTime;
 var difference;
@@ -11,8 +15,14 @@ var running = false;
 
 function ChangeBackground(){
     var i = Math.floor(Math.random() * 5);
-    var backgroundarray = ["background2.png","background3.png","background4.png","background5.png","background.png"];
     document.body.style.backgroundImage = "url("+backgroundarray[i]+")";
+}
+
+function ChangePuzzle(){
+    var character = Math.floor(Math.random() * 3);
+    for(var i=1;i<=15;i++){
+        document.getElementById(`tile_${i}`).style.backgroundImage = `url(./${puzzleStyles[character]}/${i}.jpg)`;
+    }
 }
 
 //Populate HTML with tiles
@@ -34,6 +44,7 @@ function CreateGrid(){
 
     //Call shuffle
     Shuffle()
+    ChangePuzzle()
 }
 
 //Shuffle override
@@ -60,6 +71,9 @@ function Shuffle(){
     for (var i=0; i<4; i++){
         for (var j=0; j<4; j++){					
             document.getElementById('grid').innerHTML +='<div onClick="TilePressed(this,'+tile_matrix[i][j]+')" id="tile_'+tile_matrix[i][j]+'">'+tile_matrix[i][j]+'</div>';
+            if(tile_matrix[i][j]!=16){
+                document.getElementById(`tile_${tile_matrix[i][j]}`).style.backgroundImage = `url(./${puzzleStyles[character]}/${tile_matrix[i][j]}.jpg)`;
+            }
         }
     }
 }
